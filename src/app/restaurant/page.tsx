@@ -11,15 +11,6 @@ import type { SearchParams } from "@/types/restaurant";
 import clsx from "clsx";
 import type React from "react";
 import { useState } from "react";
-import { BsFillCreditCardFill } from "react-icons/bs";
-import { BsSearch } from "react-icons/bs";
-import { FaCircleChevronRight, FaLocationDot } from "react-icons/fa6";
-import { IoMdTrain } from "react-icons/io";
-import { IoLocationSharp, IoTime } from "react-icons/io5";
-import { LuRefreshCw } from "react-icons/lu";
-import { MdLocationOn, MdRestaurant } from "react-icons/md";
-import { MdModeNight } from "react-icons/md";
-import { TiLocationArrow } from "react-icons/ti";
 import CreditDisplay from "../../components/restaurants/CreditDisplay";
 
 export default function Page() {
@@ -34,7 +25,7 @@ export default function Page() {
 		pageSize: 10,
 		params,
 	});
-	const { isLoading, mutate } = fetch;
+	const { isLoading } = fetch;
 
 	return (
 		<div className="flex flex-col items-center">

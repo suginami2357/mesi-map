@@ -21,7 +21,7 @@ export default function SearchForm({
 	setSearchParams,
 	setIsModalOpen,
 }: SearchFormProps) {
-	const { keyword, genres, position } = params;
+	const { genres, position } = params;
 
 	const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
 		const value = (event.target as HTMLInputElement).value;

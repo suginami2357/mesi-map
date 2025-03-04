@@ -2,6 +2,7 @@ import type { FetchRestaurantResponse } from "@/hooks/useFetchRestaurant";
 import type { SearchParams } from "@/types/restaurant";
 import { formatData, formatDistance } from "@/utils/restaurant";
 import clsx from "clsx";
+import Image from "next/image";
 import { IoMdRestaurant } from "react-icons/io";
 import { IoLocationSharp } from "react-icons/io5";
 import { MdRestaurant } from "react-icons/md";
@@ -61,10 +62,12 @@ export default function RestaurantList({ fetch, params }: RestaurantListProps) {
 					)}
 				>
 					<div className="m-2 text-xs text-gray-600">
-						<img
+						<Image
 							className={clsx("h-[21dvh] w-dvw rounded object-cover")}
 							src={x.photo.pc.l}
 							alt={x.name}
+							width={238}
+							height={238}
 						/>
 						<div className="font-bold my-1 text-base text-gray-900">
 							<a href={x.urls.pc} target="_blank" rel="noopener noreferrer">
