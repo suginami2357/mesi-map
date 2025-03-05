@@ -43,10 +43,10 @@ export default function SearchForm({
 	};
 
 	return (
-		<div className="w-80 h-full bg-white shadow-lg">
+		<div className="w-80 h-full bg-white shadow-md">
 			<div className="m-4 text-gray-900">
 				{/* キーワード検索 */}
-				<div className="flex items-center my-10 rounded-md shadow-xs">
+				<div className="flex items-center my-10 rounded-md">
 					<div className="mx-1">
 						<BsSearch size={18} className="text-gray-500" />
 					</div>
@@ -75,7 +75,7 @@ export default function SearchForm({
 									key={item.code}
 									type="button"
 									className={clsx(
-										"flex items-center justify-center h-10 border-[0.5px] rounded-sm shadow-md",
+										"flex items-center justify-center h-10 border-[0.5px] rounded-sm shadow-sm",
 										params.genres.some((x) => x.code === item.code)
 											? "bg-gray-950 text-white border-white opacity-90"
 											: "bg-white border-gray-950",
@@ -112,7 +112,7 @@ export default function SearchForm({
 								key={value}
 								type="button"
 								className={clsx(
-									"flex items-center justify-center h-10 border-[0.5px] rounded-sm shadow-md",
+									"flex items-center justify-center h-10 border-[0.5px] rounded-sm shadow-sm",
 									params[value as keyof SearchParams]
 										? "bg-gray-950 text-white border-white opacity-90"
 										: "bg-white border-gray-950",
@@ -132,7 +132,7 @@ export default function SearchForm({
 					<button
 						type="button"
 						className={clsx(
-							"flex items-center justify-center w-full h-10 _mt-2 text-sm border-[0.5px] rounded-sm shadow-md",
+							"flex items-center justify-center w-full h-10 _mt-2 text-sm border-[0.5px] rounded-sm shadow-sm",
 							position
 								? "bg-gray-950 text-white border-white opacity-90"
 								: "bg-white border-gray-950",
