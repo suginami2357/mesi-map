@@ -13,7 +13,9 @@ export default async function handler(
 		// クエリパラメータを動的に構築
 		const params = new URLSearchParams();
 		for (const key of Object.keys(req.query)) {
-			req.query[key] && params.append(key, req.query[key].toString());
+			if (req.query[key]) {
+				params.append(key, req.query[key].toString());
+			}
 		}
 
 		const response = await fetch(
@@ -27,7 +29,7 @@ export default async function handler(
 		const data = await response.json();
 		res.status(200).json(data);
 	} catch (error) {
-		console.error(error); // エラーを使用して警告を解消
+		console.error(error);
 		res.status(500).json({ message: "Internal Server Error" });
 		// res.status(500).json({ results: { shop: [] } });
 	}
