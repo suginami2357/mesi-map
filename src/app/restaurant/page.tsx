@@ -28,7 +28,7 @@ export default function Page() {
 	const { isLoading } = fetch;
 
 	return (
-		<div className="flex flex-col items-center">
+		<div className="flex flex-col items-center bg-white">
 			<CreditDisplay className="h-2 text-[6px] text-gray-600" />
 			<RestaurantList fetch={fetch} params={params} />
 
