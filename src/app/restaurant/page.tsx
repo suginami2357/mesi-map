@@ -6,7 +6,6 @@ import Sidebar from "@/components/ui/sidebar";
 import { useDevice } from "@/hooks/useDevice";
 import { useFetchGenre } from "@/hooks/useFetchGenre";
 import { useFetchRestaurant } from "@/hooks/useFetchRestaurant";
-import { useScroll } from "@/hooks/useScroll";
 import type { SearchParams } from "@/types/restaurant";
 import clsx from "clsx";
 import type React from "react";
