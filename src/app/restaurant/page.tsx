@@ -15,7 +15,7 @@ import CreditDisplay from "../../components/restaurants/CreditDisplay";
 
 export default function Page() {
 	const { isMobile } = useDevice();
-	const { scrollY } = useScroll();
+	// const { scrollY } = useScroll();
 
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [params, setParams] = useState<SearchParams>({ genres: [] });
@@ -37,14 +37,14 @@ export default function Page() {
 					className={clsx(
 						"fixed flex items-center justify-center z-30 left-2 bottom-8 w-12 h-12 bg-white text-gray-900 rounded-full shadow-lg",
 						isMobile &&
-							scrollY > 5000 &&
+							// scrollY > 5000 &&
 							"bg-white/50 backdrop-blur-[6px] backdrop-contrast-[4]",
 					)}
-					style={
-						isMobile
-							? { opacity: scrollY < 5000 ? 1 - scrollY / 10000 : 1 }
-							: {}
-					}
+					// style={
+					// 	isMobile
+					// 		? { opacity: scrollY < 5000 ? 1 - scrollY / 10000 : 1 }
+					// 		: {}
+					// }
 					isOpen={isModalOpen}
 					setIsOpen={setIsModalOpen}
 				/>
