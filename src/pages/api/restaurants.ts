@@ -27,6 +27,8 @@ export default async function handler(
 		const data = await response.json();
 		res.status(200).json(data);
 	} catch (error) {
-		res.status(500).json({ results: { shop: [] } });
+		console.error(error); // エラーを使用して警告を解消
+		res.status(500).json({ message: "Internal Server Error" });
+		// res.status(500).json({ results: { shop: [] } });
 	}
 }
