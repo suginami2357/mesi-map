@@ -53,9 +53,6 @@ export default function RestaurantList({ fetch, params }: RestaurantListProps) {
 				</div>
 			}
 			height="100dvh"
-			style={{
-				WebkitOverflowScrolling: "touch",
-			}}
 		>
 			{data.map((x, index) => (
 				<div
