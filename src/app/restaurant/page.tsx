@@ -29,9 +29,8 @@ export default function Page() {
 	return (
 		<div className="flex flex-col items-center h-[100dvh] bg-white">
 			<CreditDisplay className="h-2 text-[6px] text-gray-600" />
-			<div className="flex h-full">
-				<RestaurantList fetch={fetch} params={params} />
-			</div>
+
+			<RestaurantList fetch={fetch} params={params} />
 
 			{(!isModalOpen || !fetch.isLoading) && (
 				<ChevronButton
