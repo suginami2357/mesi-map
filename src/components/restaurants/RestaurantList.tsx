@@ -38,6 +38,7 @@ export default function RestaurantList({ fetch, params }: RestaurantListProps) {
 
 	return (
 		<InfiniteScroll
+			height="100dvh"
 			dataLength={data.length}
 			next={() => setSize(size + 1)}
 			hasMore={hasMore}
@@ -52,7 +53,6 @@ export default function RestaurantList({ fetch, params }: RestaurantListProps) {
 					<div className="w-10 h-10 border-4 border-t-transparent rounded-full animate-spin" />
 				</div>
 			}
-			height="100dvh"
 		>
 			{data.map((x, index) => (
 				<div
