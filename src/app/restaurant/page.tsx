@@ -32,7 +32,7 @@ export default function Page() {
 
 			<RestaurantList fetch={fetch} params={params} />
 
-			{(!isModalOpen || !fetch.isLoading) && (
+			{(isModalOpen || !fetch.isLoading) && (
 				<ChevronButton
 					className={clsx(
 						"fixed flex items-center justify-center z-30 left-2 bottom-8 w-12 h-12 bg-white text-gray-900 rounded-full shadow-lg",
