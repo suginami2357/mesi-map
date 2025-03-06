@@ -54,7 +54,8 @@ export default function RestaurantList({ fetch, params }: RestaurantListProps) {
 			}
 			height="100dvh"
 			style={{
-				WebkitOverflowScrolling: "touch", // iOSのスムーズスクロール用
+				overscrollBehavior: "contain",
+				WebkitOverflowScrolling: "touch",
 			}}
 		>
 			{data.map((x, index) => (

@@ -25,16 +25,15 @@ export default function Page() {
 		pageSize: 10,
 		params,
 	});
-	const { isLoading } = fetch;
 
 	return (
-		<div className="flex flex-col items-center min-h-[100dvh] h-[100dvh] bg-white">
+		<div className="flex flex-col items-center h-[100dvh] bg-white">
 			<CreditDisplay className="h-2 text-[6px] text-gray-600" />
-			<div className="flex flex-1 h-full overflow-hidden">
+			<div className="flex h-full">
 				<RestaurantList fetch={fetch} params={params} />
 			</div>
 
-			{!isLoading && (
+			{(!isModalOpen || !fetch.isLoading) && (
 				<ChevronButton
 					className={clsx(
 						"fixed flex items-center justify-center z-30 left-2 bottom-8 w-12 h-12 bg-white text-gray-900 rounded-full shadow-lg",
