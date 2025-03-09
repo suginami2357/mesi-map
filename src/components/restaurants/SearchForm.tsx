@@ -5,6 +5,7 @@ import { BsSearch } from "react-icons/bs";
 import { MdLocationOn } from "react-icons/md";
 
 type SearchFormProps = {
+	isMobile: boolean;
 	fetch: GenreResponse;
 	params: SearchParams;
 	setSearchParams: (params: SearchParams) => void;
@@ -12,29 +13,46 @@ type SearchFormProps = {
 };
 
 export default function SearchForm({
+	isMobile,
 	fetch,
 	params,
 	setSearchParams,
 	setIsModalOpen,
 }: SearchFormProps) {
-	const { genres, position } = params;
+	const { genres, locationState } = params;
 
 	const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
 		const value = (event.target as HTMLInputElement).value;
 		if (event.key !== "Enter") return;
 
-		setSearchParams({ ...params, keyword: value, position: undefined });
-		setIsModalOpen(false);
+		setSearchParams({ ...params, keyword: value });
+
+		if (isMobile) {
+			setIsModalOpen(false);
+		}
 	};
 
 	const handleLocationButtonClick = () => {
-		if (params.position) {
-			setSearchParams({ ...params, position: undefined });
+		setSearchParams({
+			...params,
+			locationState: {
+				position: params.locationState?.position,
+				isActive: !params.locationState?.isActive,
+			},
+		});
+
+		if (locationState?.position) {
 			return;
 		}
 
 		navigator.geolocation.getCurrentPosition((position) =>
-			setSearchParams({ ...params, keyword: "", position }),
+			setSearchParams({
+				...params,
+				locationState: {
+					position,
+					isActive: true,
+				},
+			}),
 		);
 	};
 
@@ -125,7 +143,7 @@ export default function SearchForm({
 				type="button"
 				className={clsx(
 					"flex items-center justify-center w-full h-10 text-sm border-[0.5px] rounded-sm shadow-sm",
-					position
+					locationState?.isActive
 						? "bg-gray-950 text-white border-white opacity-90"
 						: "bg-white border-gray-950",
 				)}

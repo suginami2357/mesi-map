@@ -56,6 +56,7 @@ export default function Page() {
 			>
 				{genre && (
 					<SearchForm
+						isMobile={isMobile}
 						fetch={genre}
 						params={params}
 						setSearchParams={setParams}

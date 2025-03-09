@@ -16,7 +16,7 @@ type RestaurantListProps = {
 
 export default function RestaurantList({ fetch, params }: RestaurantListProps) {
 	const { data: restaurants, size, setSize, isLoading, hasMore } = fetch;
-	const { position } = params;
+	const { locationState } = params;
 
 	const data = formatData(params, restaurants);
 
@@ -94,13 +94,14 @@ export default function RestaurantList({ fetch, params }: RestaurantListProps) {
 						</div>
 
 						<div className="mt-2 text-xs text-gray-600">
-							{position ? (
+							{locationState?.position ? (
 								<div className="flex">
 									<div className="h-4 w-4 bg-gray-300 rounded-full">
 										<IoLocationSharp size={12} className="text-white m-0.5" />
 									</div>
 									<span className="ml-1">
-										現在地から{formatDistance(position, x.lng, x.lat)}
+										現在地から
+										{formatDistance(locationState.position, x.lng, x.lat)}
 									</span>
 								</div>
 							) : (

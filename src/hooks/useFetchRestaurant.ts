@@ -19,7 +19,7 @@ export const useFetchRestaurant = ({
 	params,
 	pageSize,
 }: Options): FetchRestaurantResponse => {
-	const { keyword, genres: genre, position, ...rest } = params;
+	const { keyword, genres: genre, locationState, ...rest } = params;
 
 	const [hasMore, setHasMore] = useState(true);
 
@@ -39,8 +39,8 @@ export const useFetchRestaurant = ({
 			.map(([key]) => `&${key}=1`)
 			.join("");
 
-		if (position) {
-			result += `&lat=${position.coords.latitude}&lng=${position.coords.longitude}&range=5`;
+		if (locationState?.position) {
+			result += `&lat=${locationState.position.coords.latitude}&lng=${locationState.position.coords.longitude}&range=5`;
 		}
 
 		return result;
@@ -72,5 +72,13 @@ export const useFetchRestaurant = ({
 		setHasMore(false);
 	}
 
-	return { ...response, hasMore };
+	return {
+		...response,
+		// 位置情報取得中はloadingをtrueにする
+		isLoading: !!(
+			response.isLoading ||
+			(locationState?.isActive && !locationState.position)
+		),
+		hasMore,
+	};
 };

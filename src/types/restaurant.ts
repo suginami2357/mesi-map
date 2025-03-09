@@ -22,7 +22,10 @@ export type SearchParams = {
 	//子連れ歓迎
 	child?: boolean;
 	// 位置情報
-	position?: GeolocationPosition;
+	locationState?: {
+		position: GeolocationPosition | undefined;
+		isActive: boolean;
+	};
 };
 
 export type RestaurantResponse = {
