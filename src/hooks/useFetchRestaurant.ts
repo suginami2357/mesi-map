@@ -39,7 +39,7 @@ export const useFetchRestaurant = ({
 			.map(([key]) => `&${key}=1`)
 			.join("");
 
-		if (locationState?.position) {
+		if (locationState?.isActive && locationState.position) {
 			result += `&lat=${locationState.position.coords.latitude}&lng=${locationState.position.coords.longitude}&range=5`;
 		}
 
