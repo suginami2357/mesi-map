@@ -19,8 +19,6 @@ export default function RestaurantList({ fetch, params }: RestaurantListProps) {
 	const { data: restaurants, size, setSize, isLoading, hasMore } = fetch;
 	const { locationState } = params;
 
-	const { isMobile } = useDevice();
-
 	const data = formatData(params, restaurants);
 
 	if (!isLoading && !data.length) {
@@ -74,69 +72,71 @@ export default function RestaurantList({ fetch, params }: RestaurantListProps) {
 				</div>
 			}
 		>
-			{data.map((x, index) => (
-				<div
-					key={x.id}
-					className={clsx(
-						"flex flex-col max-w-md bg-white shadow-md rounded",
-						index === 0 ? "mb-2 mx-2" : "m-2",
-					)}
-				>
-					<div className="m-2 text-xs text-gray-600">
-						<Image
-							className={clsx("h-[21dvh] w-dvw rounded object-cover")}
-							src={x.photo.pc.l}
-							alt={x.name}
-							width={238}
-							height={238}
-							priority={index === 0}
-						/>
-						<div className="font-bold my-1 text-base text-gray-900">
-							<a href={x.urls.pc} target="_blank" rel="noopener noreferrer">
-								{x.name}
-							</a>
-						</div>
-						<div className="flex gap-x-4">
-							<div className="flex">
-								<div className="h-4 w-4 bg-gray-300 rounded-full">
-									<MdRestaurant size={12} className="text-white m-0.5" />
-								</div>
-								<span className="ml-1">{x.genre.name}</span>
+			<div className="flex flex-col items-center">
+				{data.map((x, index) => (
+					<div
+						key={x.id}
+						className={clsx(
+							"max-w-md bg-white shadow-md rounded",
+							index === 0 ? "mb-2 mx-2" : "m-2",
+						)}
+					>
+						<div className="m-2 text-xs text-gray-600">
+							<Image
+								className={clsx("h-[21dvh] w-dvw rounded object-cover")}
+								src={x.photo.pc.l}
+								alt={x.name}
+								width={238}
+								height={238}
+								priority={index === 0}
+							/>
+							<div className="font-bold my-1 text-base text-gray-900">
+								<a href={x.urls.pc} target="_blank" rel="noopener noreferrer">
+									{x.name}
+								</a>
 							</div>
-
-							{x.sub_genre?.name && x.genre.code !== x.sub_genre.code && (
+							<div className="flex gap-x-4">
 								<div className="flex">
 									<div className="h-4 w-4 bg-gray-300 rounded-full">
 										<MdRestaurant size={12} className="text-white m-0.5" />
 									</div>
-									<span className="ml-1">{x.sub_genre.name}</span>
+									<span className="ml-1">{x.genre.name}</span>
 								</div>
-							)}
-						</div>
 
-						<div className="mt-2 text-xs text-gray-600">
-							{locationState?.isActive && locationState.position ? (
-								<div className="flex">
-									<div className="h-4 w-4 bg-gray-300 rounded-full">
-										<IoLocationSharp size={12} className="text-white m-0.5" />
+								{x.sub_genre?.name && x.genre.code !== x.sub_genre.code && (
+									<div className="flex">
+										<div className="h-4 w-4 bg-gray-300 rounded-full">
+											<MdRestaurant size={12} className="text-white m-0.5" />
+										</div>
+										<span className="ml-1">{x.sub_genre.name}</span>
 									</div>
-									<span className="ml-1">
-										現在地から
-										{formatDistance(locationState.position, x.lng, x.lat)}
-									</span>
-								</div>
-							) : (
-								<div className="flex">
-									<div className="h-4 w-4 bg-gray-300 rounded-full">
-										<TiLocationArrow size={16} className="text-white" />
+								)}
+							</div>
+
+							<div className="mt-2 text-xs text-gray-600">
+								{locationState?.isActive && locationState.position ? (
+									<div className="flex">
+										<div className="h-4 w-4 bg-gray-300 rounded-full">
+											<IoLocationSharp size={12} className="text-white m-0.5" />
+										</div>
+										<span className="ml-1">
+											現在地から
+											{formatDistance(locationState.position, x.lng, x.lat)}
+										</span>
 									</div>
-									<div className="ml-1">{x.mobile_access}</div>
-								</div>
-							)}
+								) : (
+									<div className="flex">
+										<div className="h-4 w-4 bg-gray-300 rounded-full">
+											<TiLocationArrow size={16} className="text-white" />
+										</div>
+										<div className="ml-1">{x.mobile_access}</div>
+									</div>
+								)}
+							</div>
 						</div>
 					</div>
-				</div>
-			))}
+				))}
+			</div>
 		</InfiniteScroll>
 	);
 }
