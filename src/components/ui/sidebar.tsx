@@ -1,5 +1,4 @@
 import clsx from "clsx";
-import { useEffect } from "react";
 
 type SidebarProps = {
 	isOpen: boolean;
