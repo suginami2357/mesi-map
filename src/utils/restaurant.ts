@@ -17,7 +17,7 @@ export function formatData(
 		.map((item) => {
 			return {
 				...item,
-				genre: formatGenre(item.genre, item.sub_genre),
+				genre: formatGenre(item.genre),
 				card: formatCard(item.card),
 				station_name: formatStationName(item.station_name),
 				budget: formatBudget(item.budget),
@@ -30,48 +30,14 @@ export function formatData(
 	return result;
 }
 
-export function formatGenre(genre: Label, sub_genre?: Label) {
-	// const { genres } = params;
-
-	// const selectGenre = (
-	// 	genres: Label[],
-	// 	genre: Label,
-	// 	sub_genre?: Label,
-	// ): Label => {
-	// 	// サブジャンルがない場合はメインジャンルを使用
-	// 	if (!sub_genre) return genre;
-
-	// 	// メインジャンルが選択されている場合はそれを使用
-	// 	if (genres.some((g) => g.code === genre.code)) return genre;
-
-	// 	// サブジャンルが選択されている場合はそれを使用
-	// 	if (genres.some((g) => g.code === sub_genre.code)) return sub_genre;
-
-	// 	// どちらも選択されていない場合はメインジャンルを使用
-	// 	return genre;
-	// };
-
-	// const value = genre;
-
-	const shorten = (name: string) => {
-		return name
+export function formatGenre(genre: Label) {
+	return {
+		code: genre.code,
+		name: genre.name
 			.replace("焼肉・ホルモン", "焼肉")
 			.replace("アジア・エスニック料理", "エスニック")
 			.split("・")
-			.reduce((a, b) => (a.length > b.length ? a : b));
-	};
-
-	const main = shorten(genre.name);
-
-	const sub =
-		sub_genre && genre.code !== sub_genre.code
-			? shorten(sub_genre.name)
-			: undefined;
-
-	return {
-		code: genre.code,
-		name: genre.name,
-		// name: [main, sub].filter((x) => x).join(" / "),
+			.reduce((a, b) => (a.length > b.length ? a : b)),
 	};
 }
 
@@ -132,17 +98,20 @@ function formatMobileAccess(value: string | undefined): string | undefined {
 	// 【】《》『』「」を削除
 	result = result.replace(/[【】《》『』「」]/g, "");
 
-	// "各駅停車" を削除
-	result = result.replace(/各駅停車/g, "");
+	// 「,」「、」 →　「/」 に変換
+	result = result.replace(/[,、､]/g, "/");
 
-	// "," →　"/" に変換
-	result = result.replace(/,/g, "/");
-
-	// "より" , "から" → " " に変換
+	// 「より」「から」 → 「 」 に変換
 	result = result.replace(/(より|から)/g, " ");
 
-	// 一番最後の "分" "秒" より後方を削除
+	// 不要なワードを削除
+	result = result.replace(/各駅停車|■/g, "");
+
+	// 一番最後の「分」「秒」より後方を削除
 	result = result.replace(/(分|秒)[^分秒]*$/, "$1");
+
+	// /で分割して最初の要素を返す
+	result = result.split("/")[0];
 
 	return result;
 }
