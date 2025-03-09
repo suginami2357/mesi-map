@@ -89,6 +89,7 @@ export default function RestaurantList({ fetch, params }: RestaurantListProps) {
 							alt={x.name}
 							width={238}
 							height={238}
+							priority={index === 0}
 						/>
 						<div className="font-bold my-1 text-base text-gray-900">
 							<a href={x.urls.pc} target="_blank" rel="noopener noreferrer">
