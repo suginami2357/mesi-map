@@ -1,4 +1,3 @@
-import { useDevice } from "@/hooks/useDevice";
 import type { FetchRestaurantResponse } from "@/hooks/useFetchRestaurant";
 import type { SearchParams } from "@/types/restaurant";
 import { formatData, formatDistance } from "@/utils/restaurant";
