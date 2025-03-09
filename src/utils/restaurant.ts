@@ -17,7 +17,7 @@ export function formatData(
 		.map((item) => {
 			return {
 				...item,
-				genre: formatGenre(params, item.genre, item.sub_genre),
+				genre: formatGenre(item.genre, item.sub_genre),
 				card: formatCard(item.card),
 				station_name: formatStationName(item.station_name),
 				budget: formatBudget(item.budget),
@@ -30,40 +30,47 @@ export function formatData(
 	return result;
 }
 
-export function formatGenre(
-	params: SearchParams,
-	genre: Label,
-	sub_genre?: Label,
-) {
-	const { genres } = params;
+export function formatGenre(genre: Label, sub_genre?: Label) {
+	// const { genres } = params;
 
-	const selectGenre = (
-		genres: Label[],
-		genre: Label,
-		sub_genre?: Label,
-	): Label => {
-		// サブジャンルがない場合はメインジャンルを使用
-		if (!sub_genre) return genre;
+	// const selectGenre = (
+	// 	genres: Label[],
+	// 	genre: Label,
+	// 	sub_genre?: Label,
+	// ): Label => {
+	// 	// サブジャンルがない場合はメインジャンルを使用
+	// 	if (!sub_genre) return genre;
 
-		// メインジャンルが選択されている場合はそれを使用
-		if (genres.some((g) => g.code === genre.code)) return genre;
+	// 	// メインジャンルが選択されている場合はそれを使用
+	// 	if (genres.some((g) => g.code === genre.code)) return genre;
 
-		// サブジャンルが選択されている場合はそれを使用
-		if (genres.some((g) => g.code === sub_genre.code)) return sub_genre;
+	// 	// サブジャンルが選択されている場合はそれを使用
+	// 	if (genres.some((g) => g.code === sub_genre.code)) return sub_genre;
 
-		// どちらも選択されていない場合はメインジャンルを使用
-		return genre;
-	};
+	// 	// どちらも選択されていない場合はメインジャンルを使用
+	// 	return genre;
+	// };
 
-	const value = selectGenre(genres, genre, sub_genre);
+	// const value = genre;
+
+	const main = genre.name
+		.replace("焼肉・ホルモン", "焼肉")
+		.replace("アジア・エスニック料理", "エスニック")
+		.split("・")
+		.reduce((a, b) => (a.length > b.length ? a : b));
+
+	const sub =
+		sub_genre && genre.code !== sub_genre.code
+			? sub_genre?.name
+					.replace("焼肉・ホルモン", "焼肉")
+					.replace("アジア・エスニック料理", "エスニック")
+					.split("・")
+					.reduce((a, b) => (a.length > b.length ? a : b))
+			: undefined;
 
 	return {
-		code: value.code,
-		name: value.name
-			.replace("焼肉・ホルモン", "焼肉")
-			.replace("アジア・エスニック料理", "エスニック")
-			.split("・")
-			.reduce((a, b) => (a.length > b.length ? a : b)),
+		code: genre.code,
+		name: [main, sub].filter((x) => x).join(" / "),
 	};
 }
 

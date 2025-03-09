@@ -41,7 +41,7 @@ export default function SearchForm({
 	return (
 		<div className="flex flex-col m-4 gap-y-4 text-gray-900">
 			{/* キーワード検索 */}
-			<div className="flex items-center my-10 rounded-md">
+			<div className="flex items-center my-4 rounded-md">
 				<div className="mx-1">
 					<BsSearch size={18} className="text-gray-500" />
 				</div>
@@ -115,7 +115,7 @@ export default function SearchForm({
 								});
 							}}
 						>
-							{formatGenre(params, item).name}
+							{formatGenre(item).name}
 						</button>
 					))}
 			</div>

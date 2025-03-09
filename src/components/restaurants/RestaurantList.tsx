@@ -83,7 +83,15 @@ export default function RestaurantList({ fetch, params }: RestaurantListProps) {
 								<span className="ml-1">{x.genre.name}</span>
 							</div>
 
-							{/* 「現在地から探す」で表示 */}
+							{/* <div className="flex">
+								<div className="h-4 w-4 bg-gray-300 rounded-full">
+									<IoLocationSharp size={12} className="text-white m-0.5" />
+								</div>
+								<span className="ml-1">{x.sub_genre?.name}</span>
+							</div> */}
+						</div>
+
+						<div className="mt-2 text-xs text-gray-600">
 							{position ? (
 								<div className="flex">
 									<div className="h-4 w-4 bg-gray-300 rounded-full">
@@ -96,27 +104,12 @@ export default function RestaurantList({ fetch, params }: RestaurantListProps) {
 							) : (
 								<div className="flex">
 									<div className="h-4 w-4 bg-gray-300 rounded-full">
-										<IoLocationSharp size={12} className="text-white m-0.5" />
+										<TiLocationArrow size={16} className="text-white" />
 									</div>
-									<span className="ml-1">{x.middle_area.name}</span>
+									<div className="ml-1">{x.mobile_access}</div>
 								</div>
 							)}
 
-							{/* <div className="flex">
-                                        <div className="h-4 w-4 bg-gray-300 rounded-full">
-                                            <MdModeNight size={12} className="text-white m-0.5" />
-                                        </div>
-                                        <span className="ml-1">{x.budget.name}</span>
-                                    </div> */}
-						</div>
-
-						<div className="mt-2 text-xs text-gray-600">
-							<div className="flex">
-								<div className="h-4 w-4 bg-gray-300 rounded-full">
-									<TiLocationArrow size={16} className="text-white" />
-								</div>
-								<div className="ml-1">{x.mobile_access}</div>
-							</div>
 							{/* <div className="flex mt-1">
                                         <div className="h-4 w-4 bg-gray-300 rounded-full">
                                             <IoTime size={12} className="text-white m-0.5" />
