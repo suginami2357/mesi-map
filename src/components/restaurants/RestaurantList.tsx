@@ -38,7 +38,7 @@ export default function RestaurantList({ fetch, params }: RestaurantListProps) {
 
 	return (
 		<InfiniteScroll
-			height="100dvh"
+			// height="100dvh"
 			dataLength={data.length}
 			next={() => setSize(size + 1)}
 			hasMore={hasMore}
