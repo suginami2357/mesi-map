@@ -41,43 +41,37 @@ export default function RestaurantList({ fetch, params }: RestaurantListProps) {
 
 	return (
 		<InfiniteScroll
-			height={isMobile ? "100dvh" : undefined}
+			height="100dvh"
 			dataLength={data.length}
 			next={() => setSize(size + 1)}
 			hasMore={hasMore}
 			loader={
-				isLoading ? (
-					<div className="flex flex-col items-center w-dvw">
-						{/* プレースホルダー */}
-						{[...Array(3)].map(() => (
-							<div
-								key={crypto.randomUUID()}
-								className="flex flex-col w-[calc(100%-16px)] max-w-md m-2 bg-white shadow-md rounded animate-pulse"
-							>
-								<div className="m-2 mt-[2px]">
-									{/* 画像 */}
-									<div className="w-full h-[calc(21dvh-6px)] bg-gray-200 rounded" />
+				<div className="flex flex-col items-center w-dvw">
+					{/* プレースホルダー */}
+					{[...Array(isLoading ? 3 : 1)].map(() => (
+						<div
+							key={crypto.randomUUID()}
+							className="flex flex-col w-[calc(100%-16px)] max-w-md m-2 bg-white shadow-md rounded animate-pulse"
+						>
+							<div className="m-2 mt-[2px]">
+								{/* 画像 */}
+								<div className="w-full h-[calc(21dvh-6px)] bg-gray-200 rounded" />
 
-									{/* タイトル */}
-									<div className="w-1/2 h-5 bg-gray-200 rounded mt-2" />
+								{/* タイトル */}
+								<div className="w-1/2 h-5 bg-gray-200 rounded mt-2" />
 
-									{/* ジャンル */}
-									<div className="flex gap-x-4 mt-2">
-										<div className="w-1/6 h-4 bg-gray-200 rounded" />
-										<div className="w-1/6 h-4 bg-gray-200 rounded" />
-									</div>
-
-									{/* アクセス */}
-									<div className="w-3/4 h-4 bg-gray-200 rounded mt-2" />
+								{/* ジャンル */}
+								<div className="flex gap-x-4 mt-2">
+									<div className="w-1/6 h-4 bg-gray-200 rounded" />
+									<div className="w-1/6 h-4 bg-gray-200 rounded" />
 								</div>
+
+								{/* アクセス */}
+								<div className="w-3/4 h-4 bg-gray-200 rounded mt-2" />
 							</div>
-						))}
-					</div>
-				) : (
-					<div className="flex items-center justify-center h-16">
-						<div className="w-10 h-10 border-4 border-t-transparent rounded-full animate-spin" />
-					</div>
-				)
+						</div>
+					))}
+				</div>
 			}
 		>
 			{data.map((x, index) => (
