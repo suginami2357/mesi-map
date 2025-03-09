@@ -91,13 +91,6 @@ export default function RestaurantList({ fetch, params }: RestaurantListProps) {
 									<span className="ml-1">{x.sub_genre.name}</span>
 								</div>
 							)}
-
-							{/* <div className="flex">
-								<div className="h-4 w-4 bg-gray-300 rounded-full">
-									<IoLocationSharp size={12} className="text-white m-0.5" />
-								</div>
-								<span className="ml-1">{x.sub_genre?.name}</span>
-							</div> */}
 						</div>
 
 						<div className="mt-2 text-xs text-gray-600">
@@ -118,60 +111,6 @@ export default function RestaurantList({ fetch, params }: RestaurantListProps) {
 									<div className="ml-1">{x.mobile_access}</div>
 								</div>
 							)}
-
-							{/* <div className="flex mt-1">
-                                        <div className="h-4 w-4 bg-gray-300 rounded-full">
-                                            <IoTime size={12} className="text-white m-0.5" />
-                                        </div>
-                                        <div className="ml-1">{x.open}</div>
-                                    </div> */}
-
-							{/* <div className="flex items-center">
-                                            <div className="h-4 w-4 bg-gray-300 rounded-full">
-                                                <IoLocationSharp size={12} className="text-white m-0.5" />
-                                            </div>
-                                            <div className="ml-1">{x.address}</div>
-                                        </div> */}
-
-							{/* <div className="flex items-center mt-3">
-                                            <div className="h-4 w-4 bg-gray-300 rounded-full">
-                                                <BiChair size={12} className="text-white m-0.5" />
-                                            </div>
-                                            <div className="ml-1">{x.capacity}席</div>
-                                        </div> */}
-							{/* <div className="flex items-center mt-2">
-                                            <div className="h-4 w-4 bg-gray-300 rounded-full">
-                                                <MdSmokingRooms size={12} className="text-white m-0.5" />
-                                            </div>
-                                            <div className="ml-1">
-                                                {formatNonSmoking(x.non_smoking)}
-                                            </div>
-                                        </div> */}
-							{/* <div className="flex items-center mt-1">
-                                            <div className="h-4 w-4 bg-gray-300 rounded-full">
-                                                <GiMeat size={12} className="text-white m-0.5" />
-                                            </div>
-                                            <div className="ml-1">
-                                                食べ放題{formatYesNo(x.free_food)}
-                                            </div>
-                                        </div>
-                                        <div className="flex items-center mt-1">
-                                            <div className="h-4 w-4 bg-gray-300 rounded-full">
-                                                <RiDrinks2Fill size={12} className="text-white m-0.5" />
-                                            </div>
-                                            <div className="ml-1">
-                                                飲み放題{formatYesNo(x.free_drink)}
-                                            </div>
-                                        </div> */}
-							{/* <div className="flex items-center mt-1">
-                                            <div className="h-4 w-4 bg-gray-300 rounded-full">
-                                                <BsFillCreditCardFill
-                                                    size={12}
-                                                    className="text-white m-0.5"
-                                                />
-                                            </div>
-                                            <div className="ml-1">クレジットカード{x.card}</div>
-                                        </div> */}
 						</div>
 					</div>
 				</div>
