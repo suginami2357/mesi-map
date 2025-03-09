@@ -53,19 +53,19 @@ export function formatGenre(genre: Label, sub_genre?: Label) {
 
 	// const value = genre;
 
-	const main = genre.name
-		.replace("焼肉・ホルモン", "焼肉")
-		.replace("アジア・エスニック料理", "エスニック")
-		.split("・")
-		.reduce((a, b) => (a.length > b.length ? a : b));
+	const shorten = (name: string) => {
+		return name
+			.replace("焼肉・ホルモン", "焼肉")
+			.replace("アジア・エスニック料理", "エスニック")
+			.split("・")
+			.reduce((a, b) => (a.length > b.length ? a : b));
+	};
+
+	const main = shorten(genre.name);
 
 	const sub =
 		sub_genre && genre.code !== sub_genre.code
-			? sub_genre?.name
-					.replace("焼肉・ホルモン", "焼肉")
-					.replace("アジア・エスニック料理", "エスニック")
-					.split("・")
-					.reduce((a, b) => (a.length > b.length ? a : b))
+			? shorten(sub_genre.name)
 			: undefined;
 
 	return {
@@ -135,6 +135,9 @@ function formatMobileAccess(value: string | undefined): string | undefined {
 
 	// 一番最後の "分" "秒" より後方を削除
 	result = result.replace(/(分|秒)[^分秒]*$/, "$1");
+
+	// "より","から" を半角スペースに変換
+	result = result.replace(/(より|から)/g, " ");
 
 	return result;
 }
