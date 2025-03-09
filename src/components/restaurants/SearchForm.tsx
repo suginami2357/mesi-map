@@ -111,7 +111,7 @@ export default function SearchForm({
 
 			{/* ジャンル */}
 			<div className="grid grid-cols-3 gap-2 text-sm">
-				{fetch.results.genre
+				{fetch.results?.genre
 					.filter(
 						(x) => !["G002", "G010", "G011", "G012", "G015"].includes(x.code),
 					)

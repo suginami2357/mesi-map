@@ -27,7 +27,7 @@ export default function Page() {
 	});
 
 	return (
-		<div className="flex flex-col items-center h-[100dvh] bg-white">
+		<div className="flex flex-col items-center h-dvh bg-white">
 			<CreditDisplay className="h-2 text-[6px] text-gray-600" />
 
 			<RestaurantList fetch={fetch} params={params} />
