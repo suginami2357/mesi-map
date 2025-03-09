@@ -97,7 +97,7 @@ export default function RestaurantList({ fetch, params }: RestaurantListProps) {
 						</div>
 
 						<div className="mt-2 text-xs text-gray-600">
-							{locationState?.position ? (
+							{locationState?.isActive && locationState.position ? (
 								<div className="flex">
 									<div className="h-4 w-4 bg-gray-300 rounded-full">
 										<IoLocationSharp size={12} className="text-white m-0.5" />

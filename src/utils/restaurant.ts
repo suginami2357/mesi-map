@@ -145,12 +145,10 @@ function formatNonSmoking(value: string | undefined): string | undefined {
 }
 
 export function formatDistance(
-	position: GeolocationPosition | undefined,
+	position: GeolocationPosition,
 	lng: number,
 	lat: number,
 ) {
-	if (position === undefined) return " - m";
-
 	const referencePoint = [lng, lat];
 
 	const userPoint = [
