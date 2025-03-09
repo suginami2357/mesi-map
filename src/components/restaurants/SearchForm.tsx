@@ -41,13 +41,13 @@ export default function SearchForm({
 	return (
 		<div className="flex flex-col m-4 gap-y-4 text-gray-900">
 			{/* キーワード検索 */}
-			<div className="flex items-center my-4 rounded-md">
+			<div className="flex items-center w-full">
 				<div className="mx-1">
 					<BsSearch size={18} className="text-gray-500" />
 				</div>
 				<div>
 					<input
-						className="ml-2 w-full text-2xl font-bold outline-none placeholder-gray-500"
+						className="ml-2 text-xl font-bold outline-none placeholder-gray-500"
 						placeholder="検索"
 						autoCorrect="off"
 						autoCapitalize="off"
