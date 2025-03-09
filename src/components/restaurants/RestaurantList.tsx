@@ -83,6 +83,15 @@ export default function RestaurantList({ fetch, params }: RestaurantListProps) {
 								<span className="ml-1">{x.genre.name}</span>
 							</div>
 
+							{x.sub_genre?.name && x.genre.code !== x.sub_genre.code && (
+								<div className="flex">
+									<div className="h-4 w-4 bg-gray-300 rounded-full">
+										<MdRestaurant size={12} className="text-white m-0.5" />
+									</div>
+									<span className="ml-1">{x.sub_genre.name}</span>
+								</div>
+							)}
+
 							{/* <div className="flex">
 								<div className="h-4 w-4 bg-gray-300 rounded-full">
 									<IoLocationSharp size={12} className="text-white m-0.5" />

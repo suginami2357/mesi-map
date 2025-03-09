@@ -71,7 +71,7 @@ export type Shop = {
 	// お店ジャンル
 	genre: Label;
 	// お店サブジャンル
-	sub_genre: Label;
+	sub_genre?: Label;
 	// ディナー予算
 	budget: {
 		code: string;

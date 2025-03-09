@@ -70,7 +70,8 @@ export function formatGenre(genre: Label, sub_genre?: Label) {
 
 	return {
 		code: genre.code,
-		name: [main, sub].filter((x) => x).join(" / "),
+		name: genre.name,
+		// name: [main, sub].filter((x) => x).join(" / "),
 	};
 }
 
@@ -122,22 +123,26 @@ function formatMobileAccess(value: string | undefined): string | undefined {
 		}
 	}
 
-	// 【】《》『』 中に "駅" が無ければ削除
-	result = result.replace(/【[^】]*】|《[^》]*》|『[^』]*』/g, (match) =>
-		match.includes("駅") ? match : "",
+	// 【】《》『』「」 中に "駅" が無ければ削除
+	result = result.replace(
+		/【[^】]*】|《[^》]*》|『[^』]*』|「[^」]*」/g,
+		(match) => (match.includes("駅") ? match : ""),
 	);
 
-	// 【】《》『』を削除
-	result = result.replace(/[【】《》『』]/g, "");
+	// 【】《》『』「」を削除
+	result = result.replace(/[【】《》『』「」]/g, "");
+
+	// "各駅停車" を削除
+	result = result.replace(/各駅停車/g, "");
 
 	// "," →　"/" に変換
 	result = result.replace(/,/g, "/");
 
+	// "より" , "から" → " " に変換
+	result = result.replace(/(より|から)/g, " ");
+
 	// 一番最後の "分" "秒" より後方を削除
 	result = result.replace(/(分|秒)[^分秒]*$/, "$1");
-
-	// "より","から" を半角スペースに変換
-	result = result.replace(/(より|から)/g, " ");
 
 	return result;
 }
