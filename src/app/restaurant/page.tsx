@@ -51,9 +51,8 @@ export default function Page() {
 			)}
 
 			<Sidebar
+				className={clsx("bg-white", isMobile && "w-full")}
 				isOpen={isModalOpen}
-				setIsOpen={setIsModalOpen}
-				showOverlay={isMobile}
 			>
 				{genre && (
 					<SearchForm
