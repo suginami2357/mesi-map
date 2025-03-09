@@ -1,9 +1,22 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { create } from "zustand";
 
+// Zustand ストア作成
+type DeviceType = "desktop" | "tablet" | "mobile";
+
+type DeviceStore = {
+	device: DeviceType;
+	setDevice: (device: DeviceType) => void;
+};
+
+const useDeviceStore = create<DeviceStore>((set) => ({
+	device: "desktop",
+	setDevice: (device) => set({ device }),
+}));
+
+// デバイス判定フック
 export function useDevice() {
-	const [device, setDevice] = useState<"desktop" | "tablet" | "mobile">(
-		"desktop",
-	);
+	const { device, setDevice } = useDeviceStore();
 
 	useEffect(() => {
 		const ua = navigator.userAgent.toLowerCase();
@@ -19,7 +32,7 @@ export function useDevice() {
 		}
 
 		setDevice("desktop");
-	}, []);
+	}, [setDevice]);
 
 	return {
 		device,

@@ -1,3 +1,4 @@
+import { useDevice } from "@/hooks/useDevice";
 import type { GenreResponse, SearchParams } from "@/types/restaurant";
 import { formatGenre } from "@/utils/restaurant";
 import clsx from "clsx";
@@ -5,7 +6,6 @@ import { BsSearch } from "react-icons/bs";
 import { MdLocationOn } from "react-icons/md";
 
 type SearchFormProps = {
-	isMobile: boolean;
 	fetch: GenreResponse;
 	params: SearchParams;
 	setSearchParams: (params: SearchParams) => void;
@@ -13,13 +13,14 @@ type SearchFormProps = {
 };
 
 export default function SearchForm({
-	isMobile,
 	fetch,
 	params,
 	setSearchParams,
 	setIsModalOpen,
 }: SearchFormProps) {
 	const { genres, locationState } = params;
+
+	const { isMobile } = useDevice();
 
 	const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
 		const value = (event.target as HTMLInputElement).value;

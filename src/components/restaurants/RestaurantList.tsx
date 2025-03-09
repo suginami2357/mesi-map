@@ -1,3 +1,4 @@
+import { useDevice } from "@/hooks/useDevice";
 import type { FetchRestaurantResponse } from "@/hooks/useFetchRestaurant";
 import type { SearchParams } from "@/types/restaurant";
 import { formatData, formatDistance } from "@/utils/restaurant";
@@ -17,6 +18,8 @@ type RestaurantListProps = {
 export default function RestaurantList({ fetch, params }: RestaurantListProps) {
 	const { data: restaurants, size, setSize, isLoading, hasMore } = fetch;
 	const { locationState } = params;
+
+	const { isMobile } = useDevice();
 
 	const data = formatData(params, restaurants);
 
@@ -38,7 +41,7 @@ export default function RestaurantList({ fetch, params }: RestaurantListProps) {
 
 	return (
 		<InfiniteScroll
-			// height="100dvh"
+			height={isMobile ? "100dvh" : undefined}
 			dataLength={data.length}
 			next={() => setSize(size + 1)}
 			hasMore={hasMore}
