@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useMediaQuery } from "react-responsive";
 import { create } from "zustand";
 
 // Zustand ストア作成
@@ -14,30 +14,19 @@ const useDeviceStore = create<DeviceStore>((set) => ({
 	setDevice: (device) => set({ device }),
 }));
 
-// デバイス判定フック
 export function useDevice() {
-	const { device, setDevice } = useDeviceStore();
+	const isMobile = useMediaQuery({ maxWidth: 767 });
+	const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1024 });
+	const isDesktop = useMediaQuery({ minWidth: 1025 });
 
-	useEffect(() => {
-		const ua = navigator.userAgent.toLowerCase();
-
-		if (/(ipad|android(?!.*mobi)|tablet)/i.test(ua)) {
-			setDevice("tablet");
-			return;
-		}
-
-		if (/(iphone|ipod|android.*mobi)/i.test(ua)) {
-			setDevice("mobile");
-			return;
-		}
-
-		setDevice("desktop");
-	}, [setDevice]);
+	let device: "desktop" | "tablet" | "mobile" = "desktop";
+	if (isMobile) device = "mobile";
+	if (isTablet) device = "tablet";
 
 	return {
 		device,
-		isDesktop: device === "desktop",
-		isTablet: device === "tablet",
-		isMobile: device === "mobile",
+		isDesktop,
+		isTablet,
+		isMobile,
 	};
 }

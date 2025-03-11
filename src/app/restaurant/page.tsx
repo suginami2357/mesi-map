@@ -17,7 +17,7 @@ export default function Page() {
 	const { isMobile } = useDevice();
 	const { scrollY } = useScroll();
 
-	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [isModalOpen, setIsModalOpen] = useState(!isMobile);
 	const [params, setParams] = useState<SearchParams>({ genres: [] });
 
 	const { data: genre } = useFetchGenre();
