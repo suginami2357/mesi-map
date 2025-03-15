@@ -1,5 +1,4 @@
 import type { RestaurantResponse, SearchParams } from "@/types/restaurant";
-import { useState } from "react";
 import type { SWRInfiniteResponse } from "swr/infinite";
 import useSWRInfinite from "swr/infinite";
 
@@ -20,8 +19,6 @@ export const useFetchRestaurant = ({
 	pageSize,
 }: Options): FetchRestaurantResponse => {
 	const { keyword, genres: genre, locationState, ...rest } = params;
-
-	const [hasMore, setHasMore] = useState(true);
 
 	const query = (() => {
 		let result = "large_area=Z011";
@@ -46,14 +43,7 @@ export const useFetchRestaurant = ({
 		return result;
 	})();
 
-	const getKey = (
-		pageIndex: number,
-		previousPageData: RestaurantResponse | null,
-	) => {
-		if (isLastPage(previousPageData)) {
-			setHasMore(false);
-			return null;
-		}
+	const getKey = (pageIndex: number) => {
 		return `/api/restaurants?${query}&start=${pageIndex * pageSize + 1}&count=${pageSize}`;
 	};
 
@@ -69,18 +59,19 @@ export const useFetchRestaurant = ({
 			response.isLoading ||
 			(locationState?.isActive && !locationState.position)
 		),
-		hasMore,
+		hasMore: isLastPage(response),
 	};
 };
 
-const isLastPage = (previousPageData: RestaurantResponse | null) => {
-	if (!previousPageData) return false;
-
+const isLastPage = (response: SWRInfiniteResponse<RestaurantResponse>) => {
+	const value = response.data?.slice(-1)[0];
+	if (!value) return true;
 	const {
 		results_available: available,
 		results_returned: returned,
 		results_start: start,
-	} = previousPageData.results;
+	} = value.results;
 
-	return available === Number(returned) + start - 1;
+	// 検索結果の開始位置 + 検索結果の件数 - 1 < 検索結果の全件数
+	return start + Number(returned) - 1 < available;
 };
