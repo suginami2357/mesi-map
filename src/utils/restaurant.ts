@@ -161,5 +161,5 @@ export function formatDistance(
 	);
 	return distance < 1000
 		? `${distance.toLocaleString()}m`
-		: `${Math.floor(distance / 1000).toLocaleString()}km`;
+		: `${(Math.floor(distance / 100) / 10).toFixed(1)}km`;
 }
