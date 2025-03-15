@@ -45,7 +45,7 @@ export default function RestaurantList({ fetch, params }: RestaurantListProps) {
 			loader={
 				<div className="flex flex-col items-center w-dvw">
 					{/* プレースホルダー */}
-					{[...Array(isLoading ? 3 : 1)].map(() => (
+					{[...Array(3)].map(() => (
 						<div
 							key={crypto.randomUUID()}
 							className="flex flex-col w-[calc(100%-16px)] max-w-md m-2 bg-white shadow-md rounded animate-pulse"

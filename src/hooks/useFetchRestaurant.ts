@@ -50,7 +50,7 @@ export const useFetchRestaurant = ({
 		pageIndex: number,
 		previousPageData: RestaurantResponse | null,
 	) => {
-		if (previousPageData && !previousPageData.results.shop.length) {
+		if (isLastPage(previousPageData)) {
 			setHasMore(false);
 			return null;
 		}
@@ -62,16 +62,6 @@ export const useFetchRestaurant = ({
 
 	const response = useSWRInfinite<RestaurantResponse>(getKey, fetcher);
 
-	// 最初のページでデータがない場合、hasMore を false にする
-	// これにより、InfiniteScroll が最初のページでロードされない
-	if (
-		hasMore &&
-		!response.isLoading &&
-		!response.data?.[0]?.results.shop.length
-	) {
-		setHasMore(false);
-	}
-
 	return {
 		...response,
 		// 位置情報取得中はloadingをtrueにする
@@ -81,4 +71,16 @@ export const useFetchRestaurant = ({
 		),
 		hasMore,
 	};
+};
+
+const isLastPage = (previousPageData: RestaurantResponse | null) => {
+	if (!previousPageData) return false;
+
+	const {
+		results_available: available,
+		results_returned: returned,
+		results_start: start,
+	} = previousPageData.results;
+
+	return available === Number(returned) + start - 1;
 };
