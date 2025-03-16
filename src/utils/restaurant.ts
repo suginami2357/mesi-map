@@ -107,11 +107,21 @@ function formatMobileAccess(value: string | undefined): string | undefined {
 	// 不要なワードを削除
 	result = result.replace(/各駅停車|■/g, "");
 
+	// 「約⚪︎分、約⚪︎秒」→「⚪︎分、⚪︎秒」
+	result = result.replace(/約([^分秒]*)/g, "$1");
+
 	// 一番最後の「分」「秒」より後方を削除
 	result = result.replace(/(分|秒)[^分秒]*$/, "$1");
 
-	// /で分割して最初の要素を返す
-	result = result.split("/")[0];
+	// 徒歩の前は半角スペースで統一
+	result = result.replace(/( 徒歩|徒歩)/g, " 徒歩");
+
+	// 「/」で分割して「分」「秒」が含まれているものを返す
+	result = result
+		.split("/")
+		.filter((part) =>
+			["分", "秒"].some((keyword) => part.includes(keyword)),
+		)?.[0];
 
 	return result;
 }
