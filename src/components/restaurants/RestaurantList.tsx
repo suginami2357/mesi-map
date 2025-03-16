@@ -8,6 +8,7 @@ import { IoLocationSharp } from "react-icons/io5";
 import { MdRestaurant } from "react-icons/md";
 import { TiLocationArrow } from "react-icons/ti";
 import InfiniteScroll from "react-infinite-scroll-component";
+import CreditDisplay from "./CreditDisplay";
 
 type RestaurantListProps = {
 	fetch: FetchRestaurantResponse;
@@ -71,13 +72,23 @@ export default function RestaurantList({ fetch, params }: RestaurantListProps) {
 				</div>
 			}
 		>
-			<div className="flex flex-col items-center">
+			<div className="flex flex-col items-center bg-white">
+				<div className="w-full h-[25px] max-w-md">
+					<CreditDisplay className="flex justify-center text-[6px] text-gray-600" />
+
+					{restaurants?.length && (
+						<div className="mr-2 text-right text-xs">
+							{restaurants?.[0].results.results_available.toLocaleString()}件
+						</div>
+					)}
+				</div>
+
 				{data.map((x, index) => (
 					<div
 						key={x.id}
 						className={clsx(
-							"max-w-md bg-white shadow-md rounded",
-							index === 0 ? "mb-2 mx-2" : "m-2",
+							"max-w-md shadow-md rounded m-2",
+							index ? "m-2" : "mb-2 mx-2",
 						)}
 					>
 						<div className="m-2 text-xs text-gray-600">
@@ -135,6 +146,7 @@ export default function RestaurantList({ fetch, params }: RestaurantListProps) {
 						</div>
 					</div>
 				))}
+				{!hasMore && <div className="h-4" />}
 			</div>
 		</InfiniteScroll>
 	);

@@ -28,8 +28,6 @@ export default function Page() {
 
 	return (
 		<div className="flex flex-col items-center h-dvh bg-white overflow-hidden">
-			<CreditDisplay className="h-2 text-[6px] text-gray-600" />
-
 			<RestaurantList fetch={fetch} params={params} />
 
 			{(isModalOpen || !fetch.isLoading) && (
