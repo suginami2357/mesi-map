@@ -89,19 +89,19 @@ function formatMobileAccess(value: string | undefined): string | undefined {
 		}
 	}
 
-	// 【】《》『』「」 中に "駅" が無ければ削除
+	// ()【】《》『』「」 中に "駅" が無ければ削除
 	result = result.replace(
-		/【[^】]*】|《[^》]*》|『[^』]*』|「[^」]*」/g,
+		/([^)]*)|【[^】]*】|《[^》]*》|『[^』]*』|「[^」]*」/g,
 		(match) => (match.includes("駅") ? match : ""),
 	);
 
 	// 【】《》『』「」を削除
 	result = result.replace(/[【】《》『』「」]/g, "");
 
-	// 「,」「、」 →　「/」 に変換
-	result = result.replace(/[,、､]/g, "/");
+	// 「,」「、」「or」→「/」 に変換
+	result = result.replace(/,、､|(or)/g, "/");
 
-	// 「より」「から」 → 「 」 に変換
+	// 「より」「から」→「 」 に変換
 	result = result.replace(/(より|から)/g, " ");
 
 	// 不要なワードを削除
