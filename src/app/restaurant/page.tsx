@@ -11,13 +11,14 @@ import type { SearchParams } from "@/types/restaurant";
 import clsx from "clsx";
 import type React from "react";
 import { useState } from "react";
-import CreditDisplay from "../../components/restaurants/CreditDisplay";
 
 export default function Page() {
 	const { isMobile } = useDevice();
 	const { scrollY } = useScroll();
 
 	const [isModalOpen, setIsModalOpen] = useState(!isMobile);
+	console.log(isMobile);
+
 	const [params, setParams] = useState<SearchParams>({ genres: [] });
 
 	const { data: genre } = useFetchGenre();
